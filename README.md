@@ -107,7 +107,6 @@ Utility.throwException(logTitle, JSON.stringify({ | }));
 Utility.logDebug(logTitle, JSON.stringify({ | }));
 ```
 
-
 ## Thank You! ❤️
 
 © 2022 Shayan Shaikh.
