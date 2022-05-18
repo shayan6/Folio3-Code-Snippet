@@ -2,7 +2,7 @@
 
 The essential collection of Folio3 Connector Snippets and commands.
 
-![snippets in action](images/snippets-in-action.gif)
+![snippets-in-action](https://user-images.githubusercontent.com/42208796/169110960-207fe300-f61e-4b78-a0fd-c53752ce00b5.gif)
 
 
 ## Snippets
