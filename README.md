@@ -1,65 +1,330 @@
-# folio3-connector-snippet README
+# Simple React Snippets
 
-This is the README for your extension "folio3-connector-snippet". After writing up a brief description, we recommend including the following sections.
+The essential collection of React Snippets and commands.
+
+![snippets in action](images/snippets-in-action.gif)
 
 ## Features
 
-Describe specific features of your extension including screenshots of your extension in action. Image paths are relative to this README file.
+Only what you need and nothing more. **No Redux. No React Native.**
 
-For example if there is an image subfolder under your extension project workspace:
+Simply, simple React snippets.
 
-\!\[feature X\]\(images/feature-x.png\)
+These snippets were selected carefully from my own day-to-day React use. Not
+everything in React is included here. This is a hand selected set of snippets
+that work the way that you would expect, not just a copy of the documentation.
 
-> Tip: Many popular extensions utilize animations. This is an excellent way to show off your extension! We recommend short, focused animations that are easy to follow.
+## Snippets
 
-## Requirements
+| Snippet | Renders                                       |
+| ------- | --------------------------------------------- |
+| `imr`   | Import React                                  |
+| `imrc`  | Import React / Component                      |
+| `imrd`  | Import ReactDOM                               |
+| `imrs`  | Import React / useState                       |
+| `imrse` | Import React / useState useEffect             |
+| `impt`  | Import PropTypes                              |
+| `impc`  | Import React / PureComponent                  |
+| `cc`    | Class Component                               |
+| `ccc`   | Class Component With Constructor              |
+| `cpc`   | Class Pure Component                          |
+| `ffc`   | Function Component                            |
+| `sfc`   | Stateless Function Component (Arrow function) |
+| `cdm`   | componentDidMount                             |
+| `uef`   | useEffect Hook                                |
+| `cwm`   | componentWillMount                            |
+| `cwrp`  | componentWillReceiveProps                     |
+| `gds`   | getDerivedStateFromProps                      |
+| `scu`   | shouldComponentUpdate                         |
+| `cwu`   | componentWillUpdate                           |
+| `cdu`   | componentDidUpdate                            |
+| `cwun`  | componentWillUnmount                          |
+| `cdc`   | componentDidCatch                             |
+| `gsbu`  | getSnapshotBeforeUpdate                       |
+| `ss`    | setState                                      |
+| `ssf`   | Functional setState                           |
+| `usf`   | Declare a new state variable using State Hook |
+| `ren`   | render                                        |
+| `rprop` | Render Prop                                   |
+| `hoc`   | Higher Order Component                        |
+| `cp`    | Context Provider                              |
+| `cpf`   | Class Property Function                       |
 
-If you have any requirements or dependencies, add a section describing those and how to install and configure them.
+## Full Expansions
 
-## Extension Settings
+### imr - Import React
 
-Include if your extension adds any VS Code settings through the `contributes.configuration` extension point.
+```javascript
+import * as React from "react";
+```
 
-For example:
+### imrc - Import React, Component
 
-This extension contributes the following settings:
+```javascript
+import * as React from "react";
+import { Component } from "react";
+```
 
-* `myExtension.enable`: enable/disable this extension
-* `myExtension.thing`: set to `blah` to do something
+### imrd - Import ReactDOM
 
-## Known Issues
+```javascript
+import ReactDOM from "react-dom";
+```
 
-Calling out known issues can help limit users opening duplicate issues against your extension.
+### imrs - Import React, useState
 
-## Release Notes
+```javascript
+import * as React from "react";
+import { useState } from "react";
+```
 
-Users appreciate release notes as you update your extension.
+### imrse - Import React, useState, useEffect
 
-### 1.0.0
+```javascript
+import * as React from "react";
+import { useState, useEffect } from "react";
+```
 
-Initial release of ...
+### impt - Import PropTypes
 
-### 1.0.1
+```javascript
+import PropTypes from "prop-types";
+```
 
-Fixed issue #.
+### impc - Import PureComponent
 
-### 1.1.0
+```javascript
+import * as React from "react";
+import { PureComponent } from "react";
+```
 
-Added features X, Y, and Z.
+### cc - Class Component
 
------------------------------------------------------------------------------------------------------------
+```javascript
+class | extends React.Component {
+  render() {
+    return <div>|</div>
+  }
+}
+export default |;
+```
 
-## Working with Markdown
+### ccc - Class Component With Constructor
 
-**Note:** You can author your README using Visual Studio Code.  Here are some useful editor keyboard shortcuts:
+```javascript
+class | extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { | };
+  }
+  render() {
+    return ( | );
+  }
+}
+export default |;
+```
 
-* Split the editor (`Cmd+\` on macOS or `Ctrl+\` on Windows and Linux)
-* Toggle preview (`Shift+CMD+V` on macOS or `Shift+Ctrl+V` on Windows and Linux)
-* Press `Ctrl+Space` (Windows, Linux) or `Cmd+Space` (macOS) to see a list of Markdown snippets
+### cpc - Class Pure Component
 
-### For more information
+```javascript
+class | extends PureComponent {
+  state = { | },
+  render() {
+    return ( | );
+  }
+}
+export default |;
+```
 
-* [Visual Studio Code's Markdown Support](http://code.visualstudio.com/docs/languages/markdown)
-* [Markdown Syntax Reference](https://help.github.com/articles/markdown-basics/)
+### ffc - Function Component
 
-**Enjoy!**
+```javascript
+function (|) {
+    return ( | );
+}
+export default |;
+```
+
+### sfc - Stateless Function Component (Arrow function)
+
+```javascript
+const | = props => {
+  return ( | );
+};
+export default |;
+```
+
+### cdm - componentDidMount
+
+```javascript
+componentDidMount() {
+  |
+}
+```
+
+### uef - useEffect Hook
+
+```javascript
+useEffect(() => {
+  |
+}, []);
+```
+
+### cwm - componentWillMount
+
+```javascript
+//WARNING! To be deprecated in React v17. Use componentDidMount instead.
+componentWillMount() {
+  |
+}
+```
+
+### cwrp - componentWillReceiveProps
+
+```javascript
+//WARNING! To be deprecated in React v17. Use new lifecycle static getDerivedStateFromProps instead.
+componentWillReceiveProps(nextProps) {
+  |
+}
+```
+
+### gds - getDerivedStateFromProps
+
+```javascript
+static getDerivedStateFromProps(nextProps, prevState) {
+  |
+}
+```
+
+### scu - shouldComponentUpdate
+
+```javascript
+shouldComponentUpdate(nextProps, nextState) {
+  |
+}
+```
+
+### cwu - componentWillUpdate
+
+```javascript
+//WARNING! To be deprecated in React v17. Use componentDidUpdate instead.
+componentWillUpdate(nextProps, nextState) {
+  |
+}
+```
+
+### cdu - componentDidUpdate
+
+```javascript
+componentDidUpdate(prevProps, prevState) {
+  |
+}
+```
+
+### cwun - componentWillUnmount
+
+```javascript
+componentWillUnmount() {
+  |
+}
+```
+
+### cdc - componentDidCatch
+
+```javascript
+componentDidCatch(error, info) {
+  |
+}
+```
+
+### gsbu - getSnapshotBeforeUpdate
+
+```javascript
+getSnapshotBeforeUpdate(prevProps, prevState) {
+  |
+}
+```
+
+### ss - setState
+
+```javascript
+this.setState({ | : | });
+```
+
+### ssf - Functional setState
+
+```javascript
+this.setState(prevState => {
+  return { | : prevState.| }
+});
+```
+
+### usf - Declare a new state variable using State Hook
+
+```javascript
+const [|, set|] = useState();
+```
+
+_Hit Tab to apply CamelCase to function. e.g. [count, setCount]_
+
+### ren - render
+
+```javascript
+render() {
+  return (
+    |
+  );
+}
+```
+
+### rprop - Render Prop
+
+```javascript
+class | extends Component {
+  state = { | },
+  render() {
+    return this.props.render({
+      |: this.state.|
+    });
+  }
+}
+export default |;
+```
+
+### hoc - Higher Order Component
+
+```javascript
+function | (|) {
+  return class extends Component {
+    constructor(props) {
+      super(props);
+    }
+    render() {
+      return < | {...this.props} />;
+    }
+  };
+}
+```
+
+### cpf - Class Property Function
+
+```javascript
+  | = (e) => {
+    |
+  }
+```
+
+## Commands
+
+### React: class to className
+
+Changes all occurences of `class` in JSX to `className`. This transform is safe
+to run multiple times on any document. No text needs to be selected as the
+command is executed on the entire document.
+
+![React: class to className](https://i.imgur.com/i1ZwvOu.gif)
+
+## Thank You! ❤️
+
+While I wrote the initial version of this extension, many people (too many to name) have helped make it what it is today. From providing TypeScript definitions to keeping up with changing API and best practices. If you are enjoying this extension, you have the great React community to thank.
+© 2022 GitHub, Inc.

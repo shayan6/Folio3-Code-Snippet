@@ -1,20 +1,42 @@
 {
-    "name": "folio3-connector-snippet",
-    "displayName": "Folio3 Connector Snippet",
-    "description": "Add code snippet for easy and quick coding",
-    "version": "0.0.1",
-    "engines": {
-        "vscode": "^1.67.0"
-    },
-    "categories": [
-        "Snippets"
-    ],
-    "contributes": {
-        "snippets": [
-            {
-                "language": "javascript",
-                "path": "./snippets/snippets.code-snippets"
-            }
-        ]
-    }
+  "name": "folio3-connector-snippet",
+  "displayName": "Folio3 Connector Snippet",
+  "description": "A customizable code snippet for easy and quick coding",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.67.0"
+  },
+  "publisher": "ShayanShaikh",
+  "author": {
+    "name": "Shayan Shaikh"
+  },
+  "homepage": "https://github.com/shayan6/Folio3-Code-Snippet",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/shayan6/Folio3-Code-Snippet"
+  },
+  "bugs": {
+    "url": "https://github.com/shayan6/Folio3-Code-Snippet/issues"
+  },
+  "icon": "images/logo.png",
+  "categories": [
+    "Snippets"
+  ],
+  "keywords": [
+    "folio3",
+    "Folio3 Connector",
+    "Suitescript",
+    "Connector",
+    "Snippet",
+    "Shayan",
+    "Shayan Shaikh"
+  ],
+  "contributes": {
+    "snippets": [
+      {
+        "language": "javascript",
+        "path": "./snippets/snippets.code-snippets"
+      }
+    ]
+  }
 }
