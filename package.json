@@ -2,7 +2,7 @@
   "name": "folio3-connector-snippet",
   "displayName": "Folio3 Connector Snippet",
   "description": "A customizable code snippet for easy and quick coding",
-  "version": "0.0.2",
+  "version": "0.0.4",
   "engines": {
     "vscode": "^1.67.0"
   },

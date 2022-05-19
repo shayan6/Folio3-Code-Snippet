@@ -1,4 +1,4 @@
-# Simple React Snippets
+# Folio3 Connector Snippets - By Shayan Shaikh
 
 The essential collection of Folio3 Connector Snippets and commands.
 
@@ -17,10 +17,11 @@ The essential collection of Folio3 Connector Snippets and commands.
 | `ue`              | F3 Utility Emergency                          |
 | `ute`             | F3 Utility Throw Exception                    |
 | `uex`             | F3 Utility Exception                          |
-| `f3-ss`           | F3 Schedule Script V1                         |
-| `extend-cc`       | Extend Connector Common script                |
-| `extend-fcf`      | Extend Client Factory script                  |
-| `extend-iel`      | Extend Item Export script                     |
+| `script-ss`       | F3 Schedule Script V1                         |
+| `extend-cc`       | Extend Connector Common script  V1            |
+| `extend-fcf`      | Extend Client Factory script V1               |
+| `extend-iel`      | Extend Item Export script V1                  |
+| `script-ue`       | F3 Userevent Script V1                        |
 
 ## Full Expansions
 
@@ -104,7 +105,7 @@ Utility.throwException(logTitle, JSON.stringify({ | }));
 ### uex | F3 Utility Exception
 
 ```javascript
-Utility.logDebug(logTitle, JSON.stringify({ | }));
+Utility.logException(logTitle, JSON.stringify({ | }));
 ```
 
 ## Thank You! ❤️
