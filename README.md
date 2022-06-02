@@ -1,6 +1,6 @@
-# Folio3 Connector Snippets - By Shayan Shaikh
+# Netsuite Code Snippets - By Shayan Shaikh
 
-The essential collection of Folio3 Connector Snippets and commands.
+The essential collection of Netsuite Code Snippets and commands.
 
 ![snippets-in-action](https://user-images.githubusercontent.com/42208796/169110960-207fe300-f61e-4b78-a0fd-c53752ce00b5.gif)
 

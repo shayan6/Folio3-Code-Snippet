@@ -2,57 +2,57 @@
 	"NS Function": {
 		"prefix": ["ns-fun"],
 		"body": ["function $0 () { \n\tconst logTitle = '${TM_FILENAME/(.*)\\..+$/$1/} => $0'; \n\ttry { \n\t\tUtility.logDebug(logTitle, 'START'); \n \n \n\t\tUtility.logDebug(logTitle, 'END');\n\t} catch (e) { \n\t\tUtility.logException(logTitle, e); \n\t}\n}"],
-		"description": "A Folio3 Function."
+		"description": "A Netsuite Function."
 	},
 	"NS Class": {
 		"prefix": ["ns-class"],
 		"body": ["$0 () { \n\tconst logTitle = '${TM_FILENAME/(.*)\\..+$/$1/} => $0'; \n\ttry { \n\t\tUtility.logDebug(logTitle, 'START'); \n \n \n\t\tUtility.logDebug(logTitle, 'END');\n\t} catch (e) { \n\t\tUtility.logException(logTitle, e); \n\t}\n}"],
-		"description": "A Folio3 Class."
+		"description": "A Netsuite Class."
 	},
 	"NS Arrow Function": {
 		"prefix": ["ns-arrow-fun"],
 		"body": ["/**\n* @description \n*/\nconst $0 = () => { \n\tconst logTitle = '${TM_FILENAME/(.*)\\..+$/$1/} => $0'; \n\ttry { \n\t\tUtility.logDebug(logTitle, 'START'); \n \n \n\t\tUtility.logDebug(logTitle, 'END');\n\t} catch (e) { \n\t\tUtility.logException(logTitle, e); \n\t}\n}"],
-		"description": "A Folio3 Arrow Function."
+		"description": "A Netsuite Arrow Function."
 	},
 	"Utility debug": {
 		"prefix": ["ns-udb"],
 		"body": ["Utility.logDebug(logTitle, JSON.stringify({ $0 }));"],
-		"description": "A Folio3 debug log."
+		"description": "A Netsuite debug log."
 	},
 	"Utility Audit": {
 		"prefix": ["ns-ua"],
 		"body": ["Utility.logAudit(logTitle, JSON.stringify({ $0 }));"],
-		"description": "A Folio3 Audit log."
+		"description": "A Netsuite Audit log."
 	},
 	"Utility Emergency": {
 		"prefix": ["ns-ue"],
 		"body": ["Utility.logEmergency(logTitle, JSON.stringify({ $0 }));"],
-		"description": "A Folio3 Emergency log."
+		"description": "A Netsuite Emergency log."
 	},
 	"Utility Throw Exception": {
 		"prefix": ["ns-ute"],
 		"body": ["Utility.throwException(logTitle, JSON.stringify({ $0 }));"],
-		"description": "A Folio3 Throw Exception log."
+		"description": "A Netsuite Throw Exception log."
 	},
 	"Utility Exception": {
 		"prefix": ["ns-uex"],
 		"body": ["Utility.logException(logTitle, JSON.stringify({ $0 }));"],
-		"description": "A Folio3 Exception log."
+		"description": "A Netsuite Exception log."
 	},
 	"Extend Connector Common script": {
 		"prefix": ["ns-extend-cc"],
 		"body": ["if (typeof ConnectorCommon != 'undefined') {\n  const parentConnectorCommon =\n    typeof parentConnectorCommon !== 'undefined' ? { ...parentConnectorCommon } : { ...ConnectorCommon };\n  ConnectorCommon = {\n    ...parentConnectorCommon,\n    // place extended functions here...\n    $0\n\n  };\n}\n"],
-		"description": "A Folio3 Extend Connector Common script."
+		"description": "A Netsuite Extend Connector Common script."
 	},
 	"Extend Client Factory script": {
 		"prefix": ["ns-extend-fcf"],
 		"body": ["if (typeof F3ClientFactory !== 'undefined') {\n  F3ClientFactory.createClient = function (accountId, storeType) {\n    let client = {};\n    client = new ExtendedClient();\n    return client;\n  };\n\n  function ExtendedClient() {\n    const currentClient = new F3ClientBase();\n    const baseClient = new F3ClientBase();\n\n    // place extended functions here...\n$0\n    return currentClient;\n  }\n}"],
-		"description": "A Folio3 Extend Client Factory script."
+		"description": "A Netsuite Extend Client Factory script."
 	},
 	"Extend Item Export script": {
 		"prefix": ["ns-extend-iel"],
 		"body": ["if (typeof ItemExportLibrary !== 'undefined') {\n  const parentItemExportLibrary =\n    typeof parentItemExportLibrary !== 'undefined' ? { ...parentItemExportLibrary } : { ...ItemExportLibrary };\n  ItemExportLibrary = {\n    ...parentItemExportLibrary,\n    // place extended functions here...\n    $0\n\n  };\n}"],
-		"description": "A Folio3 Extend Item Export script."
+		"description": "A Netsuite Extend Item Export script."
 	},
 	"User Event script": {
 		"prefix": ["ns-script-ue"],
@@ -66,42 +66,42 @@
 	"NS Function V2": {
 		"prefix": ["ns-fun"],
 		"body": ["function $0 () { \n\tconst logTitle = '${TM_FILENAME/(.*)\\..+$/$1/} => $0'; \n\ttry { \n\t\tutility.logDebug({ title: logTitle, details: 'START'}); \n \n \n\t\tutility.logDebug({ title: logTitle, details: 'END' });\n\t} catch (e) { \n\t\tutility.logException({ title: logTitle, details: e }); \n\t}\n}"],
-		"description": "A Folio3 Function v2."
+		"description": "A Netsuite Function v2."
 	},
 	"NS Class V2": {
 		"prefix": ["ns-class"],
 		"body": ["$0 () { \n\tconst logTitle = '${TM_FILENAME/(.*)\\..+$/$1/} => $0'; \n\ttry { \n\t\tutility.logDebug({ title: logTitle, details: 'START'}); \n \n \n\t\tutility.logDebug({ title: logTitle, details: 'END' });\n\t} catch (e) { \n\t\tutility.logException({ title: logTitle, details: e }); \n\t}\n}"],
-		"description": "A Folio3 Class v2."
+		"description": "A Netsuite Class v2."
 	},
 	"NS Arrow Function V2": {
 		"prefix": ["ns-arrow-fun"],
 		"body": ["/**\n* @description \n*/\nconst $0 = () => { \n\tconst logTitle = '${TM_FILENAME/(.*)\\..+$/$1/} => $0'; \n\ttry { \n\t\tutility.logDebug({ title: logTitle, details: 'START'}); \n \n \n\t\tutility.logDebug({ title: logTitle, details: 'END' });\n\t} catch (e) { \n\t\tutility.logException({ title: logTitle, details: e }); \n\t}\n}"],
-		"description": "A Folio3 Arrow Function v2."
+		"description": "A Netsuite Arrow Function v2."
 	},
 	"Utility debug V2": {
 		"prefix": ["ns-udb-v2"],
 		"body": ["utility.logDebug({ title: logTitle, details: JSON.stringify({ $0 })});"],
-		"description": "A Folio3 debug log v2."
+		"description": "A Netsuite debug log v2."
 	},
 	"Utility Audit V2": {
 		"prefix": ["ns-ua-v2"],
 		"body": ["utility.logAudit({ title: logTitle, details: JSON.stringify({ $0 })});"],
-		"description": "A Folio3 Audit log v2."
+		"description": "A Netsuite Audit log v2."
 	},
 	"Utility Emergency V2": {
 		"prefix": ["ns-ue-v2"],
 		"body": ["utility.logEmergency({ title: logTitle, details: JSON.stringify({ $0 })});"],
-		"description": "A Folio3 Emergency log v2."
+		"description": "A Netsuite Emergency log v2."
 	},
 	"Utility Throw Exception V2": {
 		"prefix": ["ns-ute-v2"],
 		"body": ["utility.throwException({ title: logTitle, details: JSON.stringify({ $0 })});"],
-		"description": "A Folio3 Throw Exception log v2."
+		"description": "A Netsuite Throw Exception log v2."
 	},
 	"Utility Exception V2": {
 		"prefix": ["ns-uex-v2"],
 		"body": ["utility.logException({ title: logTitle, details: JSON.stringify({ $0 })});"],
-		"description": "A Folio3 Exception log v2."
+		"description": "A Netsuite Exception log v2."
 	},
 	"Get Value V2": {
 		"prefix": ["ns-get-value-v2"],

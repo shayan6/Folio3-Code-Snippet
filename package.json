@@ -1,8 +1,8 @@
 {
   "name": "folio3-connector-snippet",
-  "displayName": "Folio3 Connector Snippet",
+  "displayName": "Netsuite Code Snippet",
   "description": "A customizable code snippet for easy and quick coding",
-  "version": "0.0.4",
+  "version": "0.0.6",
   "engines": {
     "vscode": "^1.67.0"
   },
@@ -10,15 +10,15 @@
   "author": {
     "name": "Shayan Shaikh"
   },
-  "homepage": "https://github.com/shayan6/Folio3-Code-Snippet",
+  "homepage": "https://github.com/shayan6/Netsuite-Code-Snippet",
   "repository": {
     "type": "git",
-    "url": "https://github.com/shayan6/Folio3-Code-Snippet"
+    "url": "https://github.com/shayan6/Netsuite-Code-Snippet"
   },
   "bugs": {
-    "url": "https://github.com/shayan6/Folio3-Code-Snippet/issues"
+    "url": "https://github.com/shayan6/Netsuite-Code-Snippet/issues"
   },
-  "icon": "images/logo.png",
+  "icon": "images/netsuite.jpg",
   "categories": [
     "Snippets"
   ],
@@ -26,11 +26,19 @@
     "folio3",
     "Folio3 Connector",
     "Netsuite",
+    "Netsuite Code",
     "Suitescript",
+    "Nlapi",
     "Connector",
     "Snippet",
     "Shayan",
-    "Shayan Shaikh"
+    "Shayan Shaikh",
+    "Hassan",
+    "Shehryar",
+    "Cligo",
+    "Netsoul",
+    "Latamready",
+    "Seibert"
   ],
   "contributes": {
     "snippets": [
