@@ -7,24 +7,32 @@ The essential collection of Folio3 Connector Snippets and commands.
 
 ## Snippets
 
-| Snippet               | Renders                                       |
-| -------------------   | --------------------------------------------- |
-| `ns-fun`              | NS Simple Function                            |
-| `ns-class`            | NS Class Function                             |
-| `ns-arrow-fun`        | NS Arrow Function                             |
-| `ns-udb`              | NS Utility Debug                              |
-| `ns-ua`               | NS Utility Audit                              |
-| `ns-ue`               | NS Utility Emergency                          |
-| `ns-ute`              | NS Utility Throw Exception                    |
-| `ns-uex`              | NS Utility Exception                          |
-| `ns-extend-cc`        | Extend Connector Common script  V1            |
-| `ns-extend-fcf`       | Extend Client Factory script V1               |
-| `ns-extend-iel`       | Extend Item Export script V1                  |
-| `ns-script-ue`        | NS Userevent Script V1                        |
+| Snippet               | Renders                                       | Version   |
+| -------------------   | --------------------------------------------- | --------- |
+| `ns-fun`              | NS Simple Function                            | V1        |
+| `ns-class`            | NS Class Function                             | V1        |
+| `ns-arrow-fun`        | NS Arrow Function                             | V1        |
+| `ns-udb`              | NS Utility Debug                              | V1        |
+| `ns-ua`               | NS Utility Audit                              | V1        |
+| `ns-ue`               | NS Utility Emergency                          | V1        |
+| `ns-ute`              | NS Utility Throw Exception                    | V1        |
+| `ns-uex`              | NS Utility Exception                          | V1        |
+| `ns-extend-cc`        | Extend Connector Common script                | V1        |
+| `ns-extend-fcf`       | Extend Client Factory script                  | V1        |
+| `ns-extend-iel`       | Extend Item Export script                     | V1        |
+| `ns-script-ue`        | NS Userevent Script                           | V1        |
+| `ns-fun-v2`           | NS Simple Function                            | V2        |
+| `ns-class-v2`         | NS Class Function                             | V2        |
+| `ns-arrow-fun-v2`     | NS Arrow Function                             | V2        |
+| `ns-udb-v2`           | NS Utility Debug                              | V2        |
+| `ns-ua-v2`            | NS Utility Audit                              | V2        |
+| `ns-ue-v2`            | NS Utility Emergency                          | V2        |
+| `ns-ute-v2`           | NS Utility Throw Exception                    | V2        |
+| `ns-uex-v2`           | NS Utility Exception                          | V2        |
 
 ## Full Expansions
 
-### f3-arrow-fun | F3 Arrow Function
+### ns-arrow-fun | NS Arrow Function
 
 ```javascript
 /**
@@ -43,7 +51,7 @@ const | = () => {
 }
 ```
 
-### f3-fun  | F3 Class Function
+### ns-fun  | NS Class Function
 
 ```javascript
 | () { 
@@ -60,7 +68,7 @@ const | = () => {
 ```
 
 
-### f3-fun  | F3 Simple Function
+### ns-fun  | NS Simple Function
 
 ```javascript
 function | () { 
@@ -76,36 +84,142 @@ function | () {
 }
 ```
 
+### ns-arrow-fun-v2 | NS Arrow Function
 
-### udb | F3 Utility Debug
+```javascript
+/**
+* @description 
+*/
+const | = () => { 
+    const logTitle = 'Untitled-1 => |'; 
+    try { 
+        utility.logDebug({ title: logTitle, details: 'START' }); 
+ 
+ 
+        utility.logDebug({ title: logTitle, details: 'END' });
+    } catch (e) { 
+        utility.logException({ title: logTitle, details: e });
+    }
+}
+```
+
+### ns-fun-v2  | NS Class Function
+
+```javascript
+| () { 
+    const logTitle = 'Untitled-1 => |'; 
+    try { 
+        utility.logDebug({ title: logTitle, details: 'START' }); 
+ 
+ 
+        utility.logDebug({ title: logTitle, details: 'END' });
+    } catch (e) { 
+        utility.logException({ title: logTitle, details: e });
+    }
+}
+```
+
+
+### ns-fun-v2  | NS Simple Function
+
+```javascript
+function | () { 
+    const logTitle = 'Untitled-1 => |'; 
+    try { 
+        utility.logDebug({ title: logTitle, details: 'START' }); 
+ 
+ 
+        utility.logDebug({ title: logTitle, details: 'END' });
+    } catch (e) { 
+        utility.logException({ title: logTitle, details: e });
+    }
+}
+```
+
+### ns-udb | NS Utility Debug
 
 ```javascript
 Utility.logDebug(logTitle, JSON.stringify({ | }));
 ```
 
-### ua | F3 Utility Audit
+### ns-ua | NS Utility Audit
 
 ```javascript
 Utility.logAudit(logTitle, JSON.stringify({ | }));
 ```
 
-### ue | F3 Utility Emergency
+### ns-ue | NS Utility Emergency
 
 ```javascript
 Utility.logEmergency(logTitle, JSON.stringify({ | }));
 ```
 
-### ute | F3 Utility Throw Exception
+### ns-ute | NS Utility Throw Exception
 
 ```javascript
 Utility.throwException(logTitle, JSON.stringify({ | }));
 ```
 
-### uex | F3 Utility Exception
+### ns-uex | NS Utility Exception
 
 ```javascript
 Utility.logException(logTitle, JSON.stringify({ | }));
 ```
+
+### ns-udb-v2 | NS Utility Debug
+
+```javascript
+utility.logDebug({ title: logTitle, details: JSON.stringify({ | })});
+```
+
+### ns-ua-v2 | NS utility Audit
+
+```javascript
+utility.logAudit({ title: logTitle, details: JSON.stringify({ | })});
+```
+
+### ns-ue-v2 | NS utility Emergency
+
+```javascript
+utility.logEmergency({ title: logTitle, details: JSON.stringify({ | })});
+```
+
+### ns-ute-v2 | NS utility Throw Exception
+
+```javascript
+utility.throwException({ title: logTitle, details: JSON.stringify({ | })});
+```
+
+### ns-uex-v2 | NS utility Exception
+
+```javascript
+utility.logException({ title: logTitle, details: JSON.stringify({ | })});
+```
+
+### ns-get-value-v2 | NS Get Value V2
+
+```javascript
+|.getValue({ fieldId: '|' });
+```
+
+### ns-set-value-v2 | NS Set Value V2
+
+```javascript
+|.setValue({ fieldId: '|', value: | });
+```
+
+### ns-set-sublistvalue-v2 | NS Set Sublist Value V2
+
+```javascript
+|.getSublistValue({ sublistId: '|', fieldId: '|', line: | });
+```
+
+### ns-get-subvalue-v2 | NS Get Sublist Value V2
+
+```javascript
+|.setSublistValue({ sublistId: '|', fieldId: '|', line: |, value: | });
+```
+
 
 ## Thank You! ❤️
 

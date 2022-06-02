@@ -1,15 +1,15 @@
 {
-	"F3 Function": {
+	"NS Function": {
 		"prefix": ["ns-fun"],
 		"body": ["function $0 () { \n\tconst logTitle = '${TM_FILENAME/(.*)\\..+$/$1/} => $0'; \n\ttry { \n\t\tUtility.logDebug(logTitle, 'START'); \n \n \n\t\tUtility.logDebug(logTitle, 'END');\n\t} catch (e) { \n\t\tUtility.logException(logTitle, e); \n\t}\n}"],
 		"description": "A Folio3 Function."
 	},
-	"F3 Class": {
+	"NS Class": {
 		"prefix": ["ns-class"],
 		"body": ["$0 () { \n\tconst logTitle = '${TM_FILENAME/(.*)\\..+$/$1/} => $0'; \n\ttry { \n\t\tUtility.logDebug(logTitle, 'START'); \n \n \n\t\tUtility.logDebug(logTitle, 'END');\n\t} catch (e) { \n\t\tUtility.logException(logTitle, e); \n\t}\n}"],
 		"description": "A Folio3 Class."
 	},
-	"F3 Arrow Function": {
+	"NS Arrow Function": {
 		"prefix": ["ns-arrow-fun"],
 		"body": ["/**\n* @description \n*/\nconst $0 = () => { \n\tconst logTitle = '${TM_FILENAME/(.*)\\..+$/$1/} => $0'; \n\ttry { \n\t\tUtility.logDebug(logTitle, 'START'); \n \n \n\t\tUtility.logDebug(logTitle, 'END');\n\t} catch (e) { \n\t\tUtility.logException(logTitle, e); \n\t}\n}"],
 		"description": "A Folio3 Arrow Function."
@@ -59,4 +59,66 @@
 		"body": ["/**\n * Dependencies:\n * - f3_utility_methods.js\n */\n\nconst methodName = (function () {\n  return {\n    /**\n     * The recordType (internal id) corresponds to the \\'Applied To\\' record in your script deployment.\n     * @appliedtorecord recordType\n     *\n     * @param {String} type Operation\n     * @param {nlobjForm} form Current form\n     * @param {nlobjRequest} request Request object\n     * @returns {Void}\n     */\n    userEventBeforeLoad(type, form, request) {\n      const logTitle = '${TM_FILENAME/(.*)\\..+$/$1/} => userEventBeforeLoad';\n      try {\n        Utility.logDebug(logTitle, 'START');\n\n\n        Utility.logDebug(logTitle, 'END');\n      } catch (e) {\n        Utility.logException(logTitle, e);\n      }\n    },\n\n    /**\n     * The recordType (internal id) corresponds to the \\'Applied To\\' record in your script deployment.\n     * @appliedtorecord recordType\n     *\n     * @param {String} type Operation\n     * @returns {Void}\n     */\n    userEventBeforeSubmit(type) {\n      const logTitle = '${TM_FILENAME/(.*)\\..+$/$1/} => userEventBeforeSubmit';\n      try {\n        Utility.logDebug(logTitle, 'START');\n\n\n        Utility.logDebug(logTitle, 'END');\n      } catch (e) {\n        Utility.logException(logTitle, e);\n      }\n    },\n\n\n    /**\n     * The recordType (internal id) corresponds to the \\'Applied To\\' record in your script deployment.\n     * @appliedtorecord recordType\n     *\n     * @param {String} type Operation\n     * @returns {Void}\n     */\n    userEventAfterSubmit(type) {\n      const logTitle = '${TM_FILENAME/(.*)\\..+$/$1/} => userEventAfterSubmit';\n      try {\n        Utility.logDebug(logTitle, 'START');\n\n\n        Utility.logDebug(logTitle, 'END');\n      } catch (e) {\n        Utility.logException(logTitle, e);\n      }\n    }\n  };\n})();\n\n/**\n * The recordType (internal id) corresponds to the \\'Applied To\\' record in your script deployment.\n * @appliedtorecord recordType\n *\n * @param {String} type Operation\n * @param {nlobjForm} form Current form\n * @param {nlobjRequest} request Request object\n * @returns {Void}\n */\nfunction methodNameUserEventBeforeLoad(type, form, request) {\n  return methodName.userEventBeforeLoad(type, form, request);\n}\n\n/**\n * The recordType (internal id) corresponds to the \\'Applied To\\' record in your script deployment.\n * @appliedtorecord recordType\n *\n * @param {String} type Operation\n * @returns {Void}\n */\nfunction methodNameUserEventBS(type) {\n  return methodName.userEventBeforeSubmit(type);\n}\n\n/**\n * The recordType (internal id) corresponds to the \\'Applied To\\' record in your script deployment.\n * @appliedtorecord recordType\n *\n * @param {String} type Operation\n * @returns {Void}\n */\nfunction methodNameUserEventAfterSubmit(type) {\n  return methodName.userEventAfterSubmit(type);\n}\n"],
 		"description": "Create User Event script."
 	},
+
+	// #####################################################################################################
+	// V2 Snippets #########################################################################################
+	// #####################################################################################################
+	"NS Function V2": {
+		"prefix": ["ns-fun"],
+		"body": ["function $0 () { \n\tconst logTitle = '${TM_FILENAME/(.*)\\..+$/$1/} => $0'; \n\ttry { \n\t\tutility.logDebug({ title: logTitle, details: 'START'}); \n \n \n\t\tutility.logDebug({ title: logTitle, details: 'END' });\n\t} catch (e) { \n\t\tutility.logException({ title: logTitle, details: e }); \n\t}\n}"],
+		"description": "A Folio3 Function v2."
+	},
+	"NS Class V2": {
+		"prefix": ["ns-class"],
+		"body": ["$0 () { \n\tconst logTitle = '${TM_FILENAME/(.*)\\..+$/$1/} => $0'; \n\ttry { \n\t\tutility.logDebug({ title: logTitle, details: 'START'}); \n \n \n\t\tutility.logDebug({ title: logTitle, details: 'END' });\n\t} catch (e) { \n\t\tutility.logException({ title: logTitle, details: e }); \n\t}\n}"],
+		"description": "A Folio3 Class v2."
+	},
+	"NS Arrow Function V2": {
+		"prefix": ["ns-arrow-fun"],
+		"body": ["/**\n* @description \n*/\nconst $0 = () => { \n\tconst logTitle = '${TM_FILENAME/(.*)\\..+$/$1/} => $0'; \n\ttry { \n\t\tutility.logDebug({ title: logTitle, details: 'START'}); \n \n \n\t\tutility.logDebug({ title: logTitle, details: 'END' });\n\t} catch (e) { \n\t\tutility.logException({ title: logTitle, details: e }); \n\t}\n}"],
+		"description": "A Folio3 Arrow Function v2."
+	},
+	"Utility debug V2": {
+		"prefix": ["ns-udb-v2"],
+		"body": ["utility.logDebug({ title: logTitle, details: JSON.stringify({ $0 })});"],
+		"description": "A Folio3 debug log v2."
+	},
+	"Utility Audit V2": {
+		"prefix": ["ns-ua-v2"],
+		"body": ["utility.logAudit({ title: logTitle, details: JSON.stringify({ $0 })});"],
+		"description": "A Folio3 Audit log v2."
+	},
+	"Utility Emergency V2": {
+		"prefix": ["ns-ue-v2"],
+		"body": ["utility.logEmergency({ title: logTitle, details: JSON.stringify({ $0 })});"],
+		"description": "A Folio3 Emergency log v2."
+	},
+	"Utility Throw Exception V2": {
+		"prefix": ["ns-ute-v2"],
+		"body": ["utility.throwException({ title: logTitle, details: JSON.stringify({ $0 })});"],
+		"description": "A Folio3 Throw Exception log v2."
+	},
+	"Utility Exception V2": {
+		"prefix": ["ns-uex-v2"],
+		"body": ["utility.logException({ title: logTitle, details: JSON.stringify({ $0 })});"],
+		"description": "A Folio3 Exception log v2."
+	},
+	"Get Value V2": {
+		"prefix": ["ns-get-value-v2"],
+		"body": ["$1.getValue({ fieldId: '$1' });"],
+	},
+	"Set Value V2": {
+		"prefix": ["ns-set-value-v2"],
+		"body": ["$1.setValue({ fieldId: '$2', value: $3 });"],
+	},
+	"Get Sublist Value V2": {
+		"prefix": ["ns-get-subvalue-v2"],
+		"body": ["$1.getSublistValue({ sublistId: '$2', fieldId: '$3', line: $4 });"],
+		"description": "To get the sublist value the initail line number will be 0 for V2."
+	},
+	"Set Sublist Value V2": {
+		"prefix": ["ns-set-subvalue-v2"],
+		"body": ["$1.setSublistValue({ sublistId: '$2', fieldId: '$3', line: $4, value: $5 });"],
+		"description": "To set the sublist value the initail line number will be 0 for V2."
+	}
 }
