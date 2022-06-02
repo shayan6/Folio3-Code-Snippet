@@ -7,21 +7,20 @@ The essential collection of Folio3 Connector Snippets and commands.
 
 ## Snippets
 
-| Snippet           | Renders                                       |
-| ----------------- | --------------------------------------------- |
-| `f3-fun`          | F3 Simple Function                            |
-| `f3-class`        | F3 Class Function                             |
-| `f3-arrow-fun`    | F3 Arrow Function                             |
-| `udb`             | F3 Utility Debug                              |
-| `ua`              | F3 Utility Audit                              |
-| `ue`              | F3 Utility Emergency                          |
-| `ute`             | F3 Utility Throw Exception                    |
-| `uex`             | F3 Utility Exception                          |
-| `script-ss`       | F3 Schedule Script V1                         |
-| `extend-cc`       | Extend Connector Common script  V1            |
-| `extend-fcf`      | Extend Client Factory script V1               |
-| `extend-iel`      | Extend Item Export script V1                  |
-| `script-ue`       | F3 Userevent Script V1                        |
+| Snippet               | Renders                                       |
+| -------------------   | --------------------------------------------- |
+| `ns-fun`              | NS Simple Function                            |
+| `ns-class`            | NS Class Function                             |
+| `ns-arrow-fun`        | NS Arrow Function                             |
+| `ns-udb`              | NS Utility Debug                              |
+| `ns-ua`               | NS Utility Audit                              |
+| `ns-ue`               | NS Utility Emergency                          |
+| `ns-ute`              | NS Utility Throw Exception                    |
+| `ns-uex`              | NS Utility Exception                          |
+| `ns-extend-cc`        | Extend Connector Common script  V1            |
+| `ns-extend-fcf`       | Extend Client Factory script V1               |
+| `ns-extend-iel`       | Extend Item Export script V1                  |
+| `ns-script-ue`        | NS Userevent Script V1                        |
 
 ## Full Expansions
 
@@ -109,6 +108,8 @@ Utility.logException(logTitle, JSON.stringify({ | }));
 ```
 
 ## Thank You! ❤️
+
+Author Contact: shayanshaikh996@gmail.com
 
 © 2022 Shayan Shaikh.
 

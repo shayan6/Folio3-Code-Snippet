@@ -1,66 +1,61 @@
 {
 	"F3 Function": {
-		"prefix": ["f3-fun"],
+		"prefix": ["ns-fun"],
 		"body": ["function $0 () { \n\tconst logTitle = '${TM_FILENAME/(.*)\\..+$/$1/} => $0'; \n\ttry { \n\t\tUtility.logDebug(logTitle, 'START'); \n \n \n\t\tUtility.logDebug(logTitle, 'END');\n\t} catch (e) { \n\t\tUtility.logException(logTitle, e); \n\t}\n}"],
 		"description": "A Folio3 Function."
 	},
 	"F3 Class": {
-		"prefix": ["f3-class"],
+		"prefix": ["ns-class"],
 		"body": ["$0 () { \n\tconst logTitle = '${TM_FILENAME/(.*)\\..+$/$1/} => $0'; \n\ttry { \n\t\tUtility.logDebug(logTitle, 'START'); \n \n \n\t\tUtility.logDebug(logTitle, 'END');\n\t} catch (e) { \n\t\tUtility.logException(logTitle, e); \n\t}\n}"],
 		"description": "A Folio3 Class."
 	},
 	"F3 Arrow Function": {
-		"prefix": ["f3-arrow-fun"],
+		"prefix": ["ns-arrow-fun"],
 		"body": ["/**\n* @description \n*/\nconst $0 = () => { \n\tconst logTitle = '${TM_FILENAME/(.*)\\..+$/$1/} => $0'; \n\ttry { \n\t\tUtility.logDebug(logTitle, 'START'); \n \n \n\t\tUtility.logDebug(logTitle, 'END');\n\t} catch (e) { \n\t\tUtility.logException(logTitle, e); \n\t}\n}"],
 		"description": "A Folio3 Arrow Function."
 	},
 	"Utility debug": {
-		"prefix": ["udb"],
+		"prefix": ["ns-udb"],
 		"body": ["Utility.logDebug(logTitle, JSON.stringify({ $0 }));"],
 		"description": "A Folio3 debug log."
 	},
 	"Utility Audit": {
-		"prefix": ["ua"],
+		"prefix": ["ns-ua"],
 		"body": ["Utility.logAudit(logTitle, JSON.stringify({ $0 }));"],
 		"description": "A Folio3 Audit log."
 	},
 	"Utility Emergency": {
-		"prefix": ["ue"],
+		"prefix": ["ns-ue"],
 		"body": ["Utility.logEmergency(logTitle, JSON.stringify({ $0 }));"],
 		"description": "A Folio3 Emergency log."
 	},
 	"Utility Throw Exception": {
-		"prefix": ["ute"],
+		"prefix": ["ns-ute"],
 		"body": ["Utility.throwException(logTitle, JSON.stringify({ $0 }));"],
 		"description": "A Folio3 Throw Exception log."
 	},
 	"Utility Exception": {
-		"prefix": ["uex"],
+		"prefix": ["ns-uex"],
 		"body": ["Utility.logException(logTitle, JSON.stringify({ $0 }));"],
 		"description": "A Folio3 Exception log."
 	},
-	"Schedule script": {
-		"prefix": ["script-ss"],
-		"body": ["class $0 {\n  filename = '${TM_FILENAME/(.*)\\..+$/$1/}.js';\n    FieldName = {\n    STORE_ID: 'custscript_f3_storeid',\n  };\n\n  constructor() {\n    ConnectorConstants.initialize();\n    this.stores = this.loadExternalSystems();\n  }\n\n  loadExternalSystems = () => {\n    const validatedStores = [];\n    const externalSystemArr = ExternalSystemConfig.getAll();\n    for (let i = 0; i < externalSystemArr.length; i++) {\n      if (!LicenseValidator.validateLicense(externalSystemArr[i])) {\n        continue;\n      }\n      validatedStores.push(externalSystemArr[i]);\n    }\n    nlapiLogExecution('DEBUG', 'externalSystemArr', JSON.stringify(externalSystemArr));\n    return validatedStores || [];\n  };\n\n  intializeExternalSystem = (storeJson) => {\n    try {\n      nlapiLogExecution('DEBUG', 'EXTERNAL SYSTEM', JSON.stringify(storeJson));\n      const store = { ...storeJson };\n      this.store = store;\n      this.currentStoreId = store.internalId;\n      nlapiLogExecution('DEBUG', 'EXTERNAL SYSTEM', JSON.stringify(store));\n      ConnectorConstants.CurrentStore = store;\n      ConnectorConstants.Client = F3ClientFactory.createClient(\n        nlapiGetContext().getCompany().toString(),\n        store.systemType\n      );\n      const externalSystemWrapper = F3WrapperFactory.getWrapper(store.systemType, store.systemId);\n      externalSystemWrapper.initialize(store);\n      externalSystemWrapper.getSessionIDFromServer(store.userName, store.password);\n      ConnectorConstants.CurrentWrapper = externalSystemWrapper;\n      return;\n    } catch (exp) {\n      Utility.logException(`${this.filename} => intializeExternalSystem`, exp);\n    }\n  };\n\n  findExternalSystemDetails = (externalSysemId) => {\n    const externalSystemDetails = _.find(this.stores, (store) => {\n      return store.internalId == externalSysemId;\n    });\n    return externalSystemDetails;\n  };\n\n  scheduled() {\n    const logTitle = `${this.filename} => scheduled`;\n    Utility.logDebug(logTitle, 'Start');\n    try {\n      const context = nlapiGetContext();\n      const externalSystemId = context.getSetting('SCRIPT', this.FieldName.STORE_ID);\n      const currentStore = this.findExternalSystemDetails(externalSystemId);\n      if (currentStore) {\n        this.intializeExternalSystem(currentStore);\n        // Export product attribute and create custom records into the netsuite\n        this.processRecords(externalSystemId);\n      } else {\n        Utility.logDebug(\n          `scheduled => Cannot sync product attribute for Store with id = ${ externalSystemId }`,\n          'Store is either inactive or its license has been expired or there is some other issue. Check in External System config record'\n        );\n      }\n    } catch (ex) {\n      Utility.logException(logTitle, JSON.stringify(ex));\n      return false;\n    }\n    return true;\n  }\n\n  // ###################################################################################################################\n  // Export product attribute ##########################################################################################\n  // ###################################################################################################################\n  processRecords = (externalSystemId) => {\n    const logTitle = `${this.filename} => processExportProductAttribute`;\n    try {\n      if (externalSystemId) {\n        // Script Start Here #########################################################\n\n\n      } else {\n        Utility.logDebug(logTitle, 'External System Id is not defined in script param');\n      }\n    } catch (ex) {\n      Utility.logException(logTitle, JSON.stringify(ex));\n      return false;\n    }\n    return true;\n  };\n\n  /**\n   * Main Function\n   * @param args\n   */\n  static main() {\n    const logTitle = `main`;\n    const success = new $0().scheduled();\n    if (success) {\n      Utility.logDebug(logTitle, 'SUCCESSFUL');\n    } else {\n      Utility.logDebug(logTitle, 'FAILED');\n    }\n  }\n}"],
-		"description": "A Folio3 Schedule Script."
-	},
 	"Extend Connector Common script": {
-		"prefix": ["extend-cc"],
+		"prefix": ["ns-extend-cc"],
 		"body": ["if (typeof ConnectorCommon != 'undefined') {\n  const parentConnectorCommon =\n    typeof parentConnectorCommon !== 'undefined' ? { ...parentConnectorCommon } : { ...ConnectorCommon };\n  ConnectorCommon = {\n    ...parentConnectorCommon,\n    // place extended functions here...\n    $0\n\n  };\n}\n"],
 		"description": "A Folio3 Extend Connector Common script."
 	},
 	"Extend Client Factory script": {
-		"prefix": ["extend-fcf"],
+		"prefix": ["ns-extend-fcf"],
 		"body": ["if (typeof F3ClientFactory !== 'undefined') {\n  F3ClientFactory.createClient = function (accountId, storeType) {\n    let client = {};\n    client = new ExtendedClient();\n    return client;\n  };\n\n  function ExtendedClient() {\n    const currentClient = new F3ClientBase();\n    const baseClient = new F3ClientBase();\n\n    // place extended functions here...\n$0\n    return currentClient;\n  }\n}"],
 		"description": "A Folio3 Extend Client Factory script."
 	},
 	"Extend Item Export script": {
-		"prefix": ["extend-iel"],
+		"prefix": ["ns-extend-iel"],
 		"body": ["if (typeof ItemExportLibrary !== 'undefined') {\n  const parentItemExportLibrary =\n    typeof parentItemExportLibrary !== 'undefined' ? { ...parentItemExportLibrary } : { ...ItemExportLibrary };\n  ItemExportLibrary = {\n    ...parentItemExportLibrary,\n    // place extended functions here...\n    $0\n\n  };\n}"],
-		"description": "A Folio3 Extend Connector Common script."
+		"description": "A Folio3 Extend Item Export script."
 	},
 	"User Event script": {
-		"prefix": ["script-ue"],
+		"prefix": ["ns-script-ue"],
 		"body": ["/**\n * Dependencies:\n * - f3_utility_methods.js\n */\n\nconst methodName = (function () {\n  return {\n    /**\n     * The recordType (internal id) corresponds to the \\'Applied To\\' record in your script deployment.\n     * @appliedtorecord recordType\n     *\n     * @param {String} type Operation\n     * @param {nlobjForm} form Current form\n     * @param {nlobjRequest} request Request object\n     * @returns {Void}\n     */\n    userEventBeforeLoad(type, form, request) {\n      const logTitle = '${TM_FILENAME/(.*)\\..+$/$1/} => userEventBeforeLoad';\n      try {\n        Utility.logDebug(logTitle, 'START');\n\n\n        Utility.logDebug(logTitle, 'END');\n      } catch (e) {\n        Utility.logException(logTitle, e);\n      }\n    },\n\n    /**\n     * The recordType (internal id) corresponds to the \\'Applied To\\' record in your script deployment.\n     * @appliedtorecord recordType\n     *\n     * @param {String} type Operation\n     * @returns {Void}\n     */\n    userEventBeforeSubmit(type) {\n      const logTitle = '${TM_FILENAME/(.*)\\..+$/$1/} => userEventBeforeSubmit';\n      try {\n        Utility.logDebug(logTitle, 'START');\n\n\n        Utility.logDebug(logTitle, 'END');\n      } catch (e) {\n        Utility.logException(logTitle, e);\n      }\n    },\n\n\n    /**\n     * The recordType (internal id) corresponds to the \\'Applied To\\' record in your script deployment.\n     * @appliedtorecord recordType\n     *\n     * @param {String} type Operation\n     * @returns {Void}\n     */\n    userEventAfterSubmit(type) {\n      const logTitle = '${TM_FILENAME/(.*)\\..+$/$1/} => userEventAfterSubmit';\n      try {\n        Utility.logDebug(logTitle, 'START');\n\n\n        Utility.logDebug(logTitle, 'END');\n      } catch (e) {\n        Utility.logException(logTitle, e);\n      }\n    }\n  };\n})();\n\n/**\n * The recordType (internal id) corresponds to the \\'Applied To\\' record in your script deployment.\n * @appliedtorecord recordType\n *\n * @param {String} type Operation\n * @param {nlobjForm} form Current form\n * @param {nlobjRequest} request Request object\n * @returns {Void}\n */\nfunction methodNameUserEventBeforeLoad(type, form, request) {\n  return methodName.userEventBeforeLoad(type, form, request);\n}\n\n/**\n * The recordType (internal id) corresponds to the \\'Applied To\\' record in your script deployment.\n * @appliedtorecord recordType\n *\n * @param {String} type Operation\n * @returns {Void}\n */\nfunction methodNameUserEventBS(type) {\n  return methodName.userEventBeforeSubmit(type);\n}\n\n/**\n * The recordType (internal id) corresponds to the \\'Applied To\\' record in your script deployment.\n * @appliedtorecord recordType\n *\n * @param {String} type Operation\n * @returns {Void}\n */\nfunction methodNameUserEventAfterSubmit(type) {\n  return methodName.userEventAfterSubmit(type);\n}\n"],
 		"description": "Create User Event script."
 	},
