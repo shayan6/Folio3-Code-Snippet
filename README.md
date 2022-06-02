@@ -223,7 +223,7 @@ utility.logException({ title: logTitle, details: JSON.stringify({ | })});
 
 ## Thank You! ❤️
 
-Author Contact: shayanshaikh996@gmail.com
+Author Email: shayanshaikh996@gmail.com
 
 © 2022 Shayan Shaikh.
 
