@@ -1,4 +1,8 @@
 {
+	
+	// #####################################################################################################
+	// V1 Snippets #########################################################################################
+	// #####################################################################################################
 	"NS Function": {
 		"prefix": ["ns-fun"],
 		"body": ["function $0 () { \n\tconst logTitle = '${TM_FILENAME/(.*)\\..+$/$1/} => $0'; \n\ttry { \n\t\tUtility.logDebug(logTitle, 'START'); \n \n \n\t\tUtility.logDebug(logTitle, 'END');\n\t} catch (e) { \n\t\tUtility.logException(logTitle, e); \n\t}\n}"],
@@ -120,5 +124,34 @@
 		"prefix": ["ns-set-subvalue-v2"],
 		"body": ["$1.setSublistValue({ sublistId: '$2', fieldId: '$3', line: $4, value: $5 });"],
 		"description": "To set the sublist value the initail line number will be 0 for V2."
-	}
+	},
+	"Load Sales Order V2": {
+		"prefix": ["ns-load-so-v2"],
+		"body": ["const $1 = $2.load({\n  type: 'salesorder',\n  id: $3\n});\n\n$2.setValue({ fieldId: '$4', value: $5 });\n\nconst $1Id = $1.save({\n  enableSourcing: false,\n  ignoreMandatoryFields: true\n});"],
+		"description": "To load salesorder for V2. Or it can be use for any type i.e salesorder, item, itemfulfillment, invoice, and cashsale, etc"
+	},
+	"Transform Sales Order V2": {
+		"prefix": ["ns-trans-so-v2"],
+		"body": ["const $1 = $2.transform({\n  fromType: 'salesorder',\n  fromId: $3,\n  toType: '$1'\n});\n\n$2.setValue({ fieldId: '$4', value: $5 });\n\nconst $1Id = $1.save({\n  enableSourcing: true,\n  ignoreMandatoryFields: true\n});"],
+		"description": "To transform salesorder to any record type for V2. Examples of toType itemfulfillment, invoice, and cashsale, etc"
+	},
+	
+	// #############################################################################################
+	// Helpers #####################################################################################
+	// #############################################################################################
+	"Copy Script Libraries": {
+		"prefix": ["ns-copy-lib"],
+		"body": "let fileForDependencies = nlapiLoadRecord(\"scheduledscript\", 'ORIGIN_SCRIPT_ID');\nlet myScript = nlapiLoadRecord(\"scheduledscript\", 'YOUR_SCRIPT_ID');\nlet librariesCount = fileForDependencies.getLineItemCount(\"libraries\");\nfor (let i = 0; i < librariesCount; i++) {\n    let scriptfile = fileForDependencies.getLineItemValue('libraries', 'scriptfile', i + 1);\n    myScript.setLineItemValue('libraries', 'scriptfile', i + 1, scriptfile);\n}\nnlapiSubmitRecord(myScript);",
+		"description": "Run this script inside the browser console to copy libraries from one another. YOUR_SCRIPT_ID referring your new script and ORIGIN_SCRIPT_ID is the script from which you want to copy dependencies"
+	},
+	"Function To Search The Record Existance V1": {
+		"prefix": ["ns-search-rec"],
+		"body": ["/**\n* @param {} el\n* @description \n*/\nconst isRecordExist = (el) => {\n  const logTitle = '${TM_FILENAME/(.*)\\..+$/$1/} => isRecordExist';\n  try {\n    const recordSearch = nlapiSearchRecord(\n      'RECORD_ID',\n      null,\n      [['FIELD_ID', 'is', el]],\n      [new nlobjSearchColumn('internalid').setSort(false)]\n    );\n    Utility.logDebug(logTitle, JSON.stringify({ recordSearch }));\n    return recordSearch ? recordSearch[0].getValue('internalid') : false;\n  } catch (e) {\n    Utility.logException(logTitle, e);\n  }\n}"],
+		"description": "A Helper Function To Search Record."
+	},
+	"NS Create/Load Record V1": {
+		"prefix": ["ns-upsert-rec"],
+		"body": ["/**\n* @param {} recordId\n* @description \n*/\nconst upsertRecord = (recordId) => {\n  const logTitle = '${TM_FILENAME/(.*)\\..+$/$1/} => upsertF3ImageRecordData';\n  try {\n    const rec = recordId ? nlapiLoadRecord('RECORD_ID', recordId) : nlapiCreateRecord('RECORD_ID');\n    rec.setFieldValue('FIELD_NAME', 'VALUE');\n    return nlapiSubmitRecord(rec, true);\n  } catch (e) {\n    Utility.logException(logTitle, e);\n  }\n};"],
+		"description": "Function to create/load record of any type."
+	},
 }

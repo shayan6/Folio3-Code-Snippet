@@ -21,6 +21,9 @@ The essential collection of Netsuite Code Snippets and commands.
 | `ns-extend-fcf`       | Extend Client Factory script                  | V1        |
 | `ns-extend-iel`       | Extend Item Export script                     | V1        |
 | `ns-script-ue`        | NS Userevent Script                           | V1        |
+| `ns-copy-lib`         | Copy Script Libraries                         | V1        |
+| `ns-search-rec`       | Function To Search The Record Existance       | V1        |
+| `ns-upsert-rec`       | NS Create/Load Record                         | V1        |
 | `ns-fun-v2`           | NS Simple Function                            | V2        |
 | `ns-class-v2`         | NS Class Function                             | V2        |
 | `ns-arrow-fun-v2`     | NS Arrow Function                             | V2        |
@@ -29,6 +32,8 @@ The essential collection of Netsuite Code Snippets and commands.
 | `ns-ue-v2`            | NS Utility Emergency                          | V2        |
 | `ns-ute-v2`           | NS Utility Throw Exception                    | V2        |
 | `ns-uex-v2`           | NS Utility Exception                          | V2        |
+| `ns-load-so-v2`       | Load and Submit Record                        | V2        |
+| `ns-trans-so-v2`      | Transform Record                              | V2        |
 
 ## Full Expansions
 
@@ -39,7 +44,7 @@ The essential collection of Netsuite Code Snippets and commands.
 * @description 
 */
 const | = () => { 
-    const logTitle = 'Untitled-1 => |'; 
+    const logTitle = 'TM_FILENAME => |'; 
     try { 
         Utility.logDebug(logTitle, 'START'); 
  
@@ -55,7 +60,7 @@ const | = () => {
 
 ```javascript
 | () { 
-    const logTitle = 'Untitled-1 => |'; 
+    const logTitle = 'TM_FILENAME => |'; 
     try { 
         Utility.logDebug(logTitle, 'START'); 
  
@@ -72,7 +77,7 @@ const | = () => {
 
 ```javascript
 function | () { 
-    const logTitle = 'Untitled-1 => |'; 
+    const logTitle = 'TM_FILENAME => |'; 
     try { 
         Utility.logDebug(logTitle, 'START'); 
  
@@ -84,6 +89,63 @@ function | () {
 }
 ```
 
+### ns-copy-lib | Copy Script Libraries
+
+```javascript
+let fileForDependencies = nlapiLoadRecord("scheduledscript", 'ORIGIN_SCRIPT_ID');
+let myScript = nlapiLoadRecord("scheduledscript", 'YOUR_SCRIPT_ID');
+let librariesCount = fileForDependencies.getLineItemCount("libraries");
+for (let i = 0; i < librariesCount; i++) {
+    let scriptfile = fileForDependencies.getLineItemValue('libraries', 'scriptfile', i + 1);
+    myScript.setLineItemValue('libraries', 'scriptfile', i + 1, scriptfile);
+}
+nlapiSubmitRecord(myScript);
+```
+
+<!-- herer -->
+### ns-search-rec | Function To Search The Record Existance
+
+```javascript
+/**
+* @param {} el
+* @description 
+*/
+const isRecordExist = (el) => {
+  const logTitle = 'TM_FILENAME => isRecordExist';
+  try {
+    const recordSearch = nlapiSearchRecord(
+      'RECORD_ID',
+      null,
+      [['FIELD_ID', 'is', el]],
+      [new nlobjSearchColumn('internalid').setSort(false)]
+    );
+    Utility.logDebug(logTitle, JSON.stringify({ recordSearch }));
+    return recordSearch ? recordSearch[0].getValue('internalid') : false;
+  } catch (e) {
+    Utility.logException(logTitle, e);
+  }
+}
+```
+
+### ns-upsert-rec | NS Create/Load Record
+
+```javascript
+/**
+* @param {} recordId
+* @description 
+*/
+const upsertRecord = (recordId) => {
+  const logTitle = 'TM_FILENAME => upsertF3ImageRecordData';
+  try {
+    const rec = recordId ? nlapiLoadRecord('RECORD_ID', recordId) : nlapiCreateRecord('RECORD_ID');
+    rec.setFieldValue('FIELD_NAME', 'VALUE');
+    return nlapiSubmitRecord(rec, true);
+  } catch (e) {
+    Utility.logException(logTitle, e);
+  }
+};
+```
+
 ### ns-arrow-fun-v2 | NS Arrow Function
 
 ```javascript
@@ -91,7 +153,7 @@ function | () {
 * @description 
 */
 const | = () => { 
-    const logTitle = 'Untitled-1 => |'; 
+    const logTitle = 'TM_FILENAME => |'; 
     try { 
         utility.logDebug({ title: logTitle, details: 'START' }); 
  
@@ -107,7 +169,7 @@ const | = () => {
 
 ```javascript
 | () { 
-    const logTitle = 'Untitled-1 => |'; 
+    const logTitle = 'TM_FILENAME => |'; 
     try { 
         utility.logDebug({ title: logTitle, details: 'START' }); 
  
@@ -124,7 +186,7 @@ const | = () => {
 
 ```javascript
 function | () { 
-    const logTitle = 'Untitled-1 => |'; 
+    const logTitle = 'TM_FILENAME => |'; 
     try { 
         utility.logDebug({ title: logTitle, details: 'START' }); 
  
@@ -208,16 +270,49 @@ utility.logException({ title: logTitle, details: JSON.stringify({ | })});
 |.setValue({ fieldId: '|', value: | });
 ```
 
-### ns-set-sublistvalue-v2 | NS Set Sublist Value V2
+### ns-get-sublistvalue-v2 | NS Set Sublist Value V2
 
 ```javascript
 |.getSublistValue({ sublistId: '|', fieldId: '|', line: | });
 ```
 
-### ns-get-subvalue-v2 | NS Get Sublist Value V2
+### ns-set-subvalue-v2 | NS Get Sublist Value V2
 
 ```javascript
 |.setSublistValue({ sublistId: '|', fieldId: '|', line: |, value: | });
+```
+
+### ns-load-so-v2 | NS Load Sales Order V2
+
+```javascript
+const | = |.load({
+  type: 'salesorder',
+  id: |
+});
+
+|.setValue({ fieldId: '|', value: | });
+
+const |Id = |.save({
+  enableSourcing: false,
+  ignoreMandatoryFields: true
+});
+```
+
+### ns-trans-so-v2 | Transform Sales Order V2
+
+```javascript
+const | = |.transform({
+  fromType: 'salesorder',
+  fromId: |,
+  toType: '|'
+});
+
+|.setValue({ fieldId: '|', value: | });
+
+const |Id = |.save({
+  enableSourcing: true,
+  ignoreMandatoryFields: true
+});
 ```
 
 
