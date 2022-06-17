@@ -2,7 +2,7 @@
   "name": "folio3-connector-snippet",
   "displayName": "Netsuite Code Snippet",
   "description": "Customizable code snippets for NetSuites SuiteScript 1.0 & 2.X for easy and quick coding",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "engines": {
     "vscode": "^1.67.0"
   },

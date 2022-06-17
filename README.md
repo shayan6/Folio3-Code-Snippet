@@ -34,6 +34,8 @@ The essential collection of Netsuite Code Snippets and commands.
 | `ns-uex-v2`           | NS Utility Exception                          | V2        |
 | `ns-load-so-v2`       | Load and Submit Record                        | V2        |
 | `ns-trans-so-v2`      | Transform Record                              | V2        |
+| `ns-upsert-rec-v2`    | NS Create/Load Record                         | V2        |
+| `ns-search-rec-v2`    | Function To Search The Record Existance       | V2        |
 
 ## Full Expansions
 
@@ -135,7 +137,7 @@ const isRecordExist = (el) => {
 * @description 
 */
 const upsertRecord = (recordId) => {
-  const logTitle = 'TM_FILENAME => upsertF3ImageRecordData';
+  const logTitle = 'TM_FILENAME => upsertRecord';
   try {
     const rec = recordId ? nlapiLoadRecord('RECORD_ID', recordId) : nlapiCreateRecord('RECORD_ID');
     rec.setFieldValue('FIELD_NAME', 'VALUE');
@@ -315,6 +317,58 @@ const |Id = |.save({
 });
 ```
 
+### ns-search-rec-v2 | Function To Search The Record Existance
+
+```javascript
+/**
+* @param {} el
+* @description
+*/
+function isRecordExist(el) {
+  const logTitle = 'TM_FILENAME => isRecordExist';
+  try {
+    const filExp = [['FIELD_ID', 'is', el]];
+    const columns = [
+      search.createColumn({
+        name: 'internalid'
+      })
+    ];
+    const recordSearch = search.create({
+      type: 'RECORD_ID',
+      filters: filExp,
+      columns
+    });
+    let internalId = false;
+    recordSearch.run().each(function (el) {
+      internalId = el.getValue({ name: 'internalid' });
+    });
+    return internalId;
+  } catch (e) {
+    utility.logException({ title: logTitle, details: JSON.stringify({ e }) });
+    return false;
+  }
+}
+```
+
+### ns-upsert-rec-v2 | NS Create/Load Record
+
+```javascript
+/**
+ * @param {*} recordId
+ * @returns
+ */
+ function upsertRecord(recordId) {
+  const logTitle = 'TM_FILENAME => upsertRecord';
+  try {
+    const record = recordId ? rec.load({ type: 'RECORD_ID', id: recordId }) : rec.create({ type: 'RECORD_ID' });
+    record.setValue({ fieldId: 'FIELD_NAME', value: 'VALUE' });
+    return record.save();
+  } catch (e) {
+    utility.logException({ title: logTitle, details: JSON.stringify(e) });
+    return false;
+  }
+}
+```
 
 ## Thank You! ❤️
 

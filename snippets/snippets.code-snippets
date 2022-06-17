@@ -70,42 +70,42 @@
 	"NS Function V2": {
 		"prefix": ["ns-fun"],
 		"body": ["function $0 () { \n\tconst logTitle = '${TM_FILENAME/(.*)\\..+$/$1/} => $0'; \n\ttry { \n\t\tutility.logDebug({ title: logTitle, details: 'START'}); \n \n \n\t\tutility.logDebug({ title: logTitle, details: 'END' });\n\t} catch (e) { \n\t\tutility.logException({ title: logTitle, details: e }); \n\t}\n}"],
-		"description": "A Netsuite Function v2."
+		"description": "A Netsuite Function 2.x."
 	},
 	"NS Class V2": {
 		"prefix": ["ns-class"],
 		"body": ["$0 () { \n\tconst logTitle = '${TM_FILENAME/(.*)\\..+$/$1/} => $0'; \n\ttry { \n\t\tutility.logDebug({ title: logTitle, details: 'START'}); \n \n \n\t\tutility.logDebug({ title: logTitle, details: 'END' });\n\t} catch (e) { \n\t\tutility.logException({ title: logTitle, details: e }); \n\t}\n}"],
-		"description": "A Netsuite Class v2."
+		"description": "A Netsuite Class 2.x."
 	},
 	"NS Arrow Function V2": {
 		"prefix": ["ns-arrow-fun"],
 		"body": ["/**\n* @description \n*/\nconst $0 = () => { \n\tconst logTitle = '${TM_FILENAME/(.*)\\..+$/$1/} => $0'; \n\ttry { \n\t\tutility.logDebug({ title: logTitle, details: 'START'}); \n \n \n\t\tutility.logDebug({ title: logTitle, details: 'END' });\n\t} catch (e) { \n\t\tutility.logException({ title: logTitle, details: e }); \n\t}\n}"],
-		"description": "A Netsuite Arrow Function v2."
+		"description": "A Netsuite Arrow Function 2.x."
 	},
 	"Utility debug V2": {
 		"prefix": ["ns-udb-v2"],
 		"body": ["utility.logDebug({ title: logTitle, details: JSON.stringify({ $0 })});"],
-		"description": "A Netsuite debug log v2."
+		"description": "A Netsuite debug log 2.x."
 	},
 	"Utility Audit V2": {
 		"prefix": ["ns-ua-v2"],
 		"body": ["utility.logAudit({ title: logTitle, details: JSON.stringify({ $0 })});"],
-		"description": "A Netsuite Audit log v2."
+		"description": "A Netsuite Audit log 2.x."
 	},
 	"Utility Emergency V2": {
 		"prefix": ["ns-ue-v2"],
 		"body": ["utility.logEmergency({ title: logTitle, details: JSON.stringify({ $0 })});"],
-		"description": "A Netsuite Emergency log v2."
+		"description": "A Netsuite Emergency log 2.x."
 	},
 	"Utility Throw Exception V2": {
 		"prefix": ["ns-ute-v2"],
 		"body": ["utility.throwException({ title: logTitle, details: JSON.stringify({ $0 })});"],
-		"description": "A Netsuite Throw Exception log v2."
+		"description": "A Netsuite Throw Exception log 2.x."
 	},
 	"Utility Exception V2": {
 		"prefix": ["ns-uex-v2"],
 		"body": ["utility.logException({ title: logTitle, details: JSON.stringify({ $0 })});"],
-		"description": "A Netsuite Exception log v2."
+		"description": "A Netsuite Exception log 2.x."
 	},
 	"Get Value V2": {
 		"prefix": ["ns-get-value-v2"],
@@ -118,40 +118,54 @@
 	"Get Sublist Value V2": {
 		"prefix": ["ns-get-subvalue-v2"],
 		"body": ["$1.getSublistValue({ sublistId: '$2', fieldId: '$3', line: $4 });"],
-		"description": "To get the sublist value the initail line number will be 0 for V2."
+		"description": "To get the sublist value the initail line number will be 0 for 2.x."
 	},
 	"Set Sublist Value V2": {
 		"prefix": ["ns-set-subvalue-v2"],
 		"body": ["$1.setSublistValue({ sublistId: '$2', fieldId: '$3', line: $4, value: $5 });"],
-		"description": "To set the sublist value the initail line number will be 0 for V2."
+		"description": "To set the sublist value the initail line number will be 0 for 2.x."
 	},
 	"Load Sales Order V2": {
 		"prefix": ["ns-load-so-v2"],
 		"body": ["const $1 = $2.load({\n  type: 'salesorder',\n  id: $3\n});\n\n$2.setValue({ fieldId: '$4', value: $5 });\n\nconst $1Id = $1.save({\n  enableSourcing: false,\n  ignoreMandatoryFields: true\n});"],
-		"description": "To load salesorder for V2. Or it can be use for any type i.e salesorder, item, itemfulfillment, invoice, and cashsale, etc"
+		"description": "To load salesorder for 2.x Or it can be use for any type i.e salesorder, item, itemfulfillment, invoice, and cashsale, etc"
 	},
 	"Transform Sales Order V2": {
 		"prefix": ["ns-trans-so-v2"],
 		"body": ["const $1 = $2.transform({\n  fromType: 'salesorder',\n  fromId: $3,\n  toType: '$1'\n});\n\n$2.setValue({ fieldId: '$4', value: $5 });\n\nconst $1Id = $1.save({\n  enableSourcing: true,\n  ignoreMandatoryFields: true\n});"],
-		"description": "To transform salesorder to any record type for V2. Examples of toType itemfulfillment, invoice, and cashsale, etc"
+		"description": "To transform salesorder to any record type for 2.x. Examples of toType itemfulfillment, invoice, and cashsale, etc"
 	},
 	
 	// #############################################################################################
 	// Helpers #####################################################################################
 	// #############################################################################################
+	"Formated Log Title": {
+		"prefix": ["ns-logtitle"],
+		"body": "const logTitle = '${TM_FILENAME/(.*)\\..+$/$1/} => ';"
+	},
 	"Copy Script Libraries": {
 		"prefix": ["ns-copy-lib"],
 		"body": "let fileForDependencies = nlapiLoadRecord(\"scheduledscript\", 'ORIGIN_SCRIPT_ID');\nlet myScript = nlapiLoadRecord(\"scheduledscript\", 'YOUR_SCRIPT_ID');\nlet librariesCount = fileForDependencies.getLineItemCount(\"libraries\");\nfor (let i = 0; i < librariesCount; i++) {\n    let scriptfile = fileForDependencies.getLineItemValue('libraries', 'scriptfile', i + 1);\n    myScript.setLineItemValue('libraries', 'scriptfile', i + 1, scriptfile);\n}\nnlapiSubmitRecord(myScript);",
 		"description": "Run this script inside the browser console to copy libraries from one another. YOUR_SCRIPT_ID referring your new script and ORIGIN_SCRIPT_ID is the script from which you want to copy dependencies"
 	},
 	"Function To Search The Record Existance V1": {
-		"prefix": ["ns-search-rec"],
+		"prefix": ["ns-search-rec", "ns-isrec-exist"],
 		"body": ["/**\n* @param {} el\n* @description \n*/\nconst isRecordExist = (el) => {\n  const logTitle = '${TM_FILENAME/(.*)\\..+$/$1/} => isRecordExist';\n  try {\n    const recordSearch = nlapiSearchRecord(\n      'RECORD_ID',\n      null,\n      [['FIELD_ID', 'is', el]],\n      [new nlobjSearchColumn('internalid').setSort(false)]\n    );\n    Utility.logDebug(logTitle, JSON.stringify({ recordSearch }));\n    return recordSearch ? recordSearch[0].getValue('internalid') : false;\n  } catch (e) {\n    Utility.logException(logTitle, e);\n  }\n}"],
 		"description": "A Helper Function To Search Record."
 	},
+	"Function To Search The Record Existance V2": {
+		"prefix": ["ns-search-rec-v2", "ns-isrec-exist-v2"],
+		"body": ["/**\n* @param {} data\n* @description\n*/\nfunction isRecordExist(el) {\n  const logTitle = '${TM_FILENAME/(.*)\\..+$/$1/} => isRecordExist';\n  try {\n    const filExp = [['FIELD_ID', 'is', el]];\n    const columns = [\n      search.createColumn({\n        name: 'internalid'\n      })\n    ];\n    const recordSearch = search.create({\n      type: 'RECORD_ID',\n      filters: filExp,\n      columns\n    });\n    let internalId = false;\n    recordSearch.run().each(function (el) {\n      internalId = el.getValue({ name: 'internalid' });\n    });\n    return internalId;\n  } catch (e) {\n    utility.logException({ title: logTitle, details: JSON.stringify({ e }) });\n    return false;\n  }\n}"],
+		"description": "A Helper Function To Search Record in 2.x."
+	},
 	"NS Create/Load Record V1": {
 		"prefix": ["ns-upsert-rec"],
-		"body": ["/**\n* @param {} recordId\n* @description \n*/\nconst upsertRecord = (recordId) => {\n  const logTitle = '${TM_FILENAME/(.*)\\..+$/$1/} => upsertF3ImageRecordData';\n  try {\n    const rec = recordId ? nlapiLoadRecord('RECORD_ID', recordId) : nlapiCreateRecord('RECORD_ID');\n    rec.setFieldValue('FIELD_NAME', 'VALUE');\n    return nlapiSubmitRecord(rec, true);\n  } catch (e) {\n    Utility.logException(logTitle, e);\n  }\n};"],
+		"body": ["/**\n* @param {} recordId\n* @description \n*/\nconst upsertRecord = (recordId) => {\n  const logTitle = '${TM_FILENAME/(.*)\\..+$/$1/} => upsertRecord';\n  try {\n    const rec = recordId ? nlapiLoadRecord('RECORD_ID', recordId) : nlapiCreateRecord('RECORD_ID');\n    rec.setFieldValue('FIELD_NAME', 'VALUE');\n    return nlapiSubmitRecord(rec, true);\n  } catch (e) {\n    Utility.logException(logTitle, e);\n  }\n};"],
 		"description": "Function to create/load record of any type."
+	},
+	"NS Create/Load Record V2": {
+		"prefix": ["ns-upsert-rec-v2"],
+		"body": ["/**\n * @param {*} recordId\n * @returns\n */\n function upsertRecord(recordId) {\n  const logTitle = '${TM_FILENAME/(.*)\\..+$/$1/} => upsertRecord';\n  try {\n    const record = recordId ? rec.load({ type: 'RECORD_ID', id: recordId }) : rec.create({ type: 'RECORD_ID' });\n    record.setValue({ fieldId: 'FIELD_NAME', value: 'VALUE' });\n    return record.save();\n  } catch (e) {\n    utility.logException({ title: logTitle, details: JSON.stringify(e) });\n    return false;\n  }\n}"],
+		"description": "Function to create/load record of any type. Created in 2.x."
 	},
 }
